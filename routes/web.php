@@ -11,6 +11,16 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+use App\History;
+
+Route::get('/', function() {
+    return redirect('/withdraw/pendings');
+});
+
+Route::get('/withdraw/pendings', 'PendingWithdrawsController@index');
+
+Route::post('/withdraw/process', 'PendingWithdrawsController@process');
+
+Route::get('/test', function () {
+
 });

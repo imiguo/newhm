@@ -4,9 +4,9 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class User extends Model
+class Deposit extends Model
 {
     public $timestamps = false;
 
-    protected $table = 'hm2_users';
+    protected $table = 'hm2_deposits';
 }
