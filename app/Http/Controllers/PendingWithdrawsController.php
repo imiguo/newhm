@@ -32,7 +32,7 @@ class PendingWithdrawsController extends Controller
                 return redirect('/withdraw/pendings');
             }
             if ($res && !isset($res['ERROR'])) {
-                DB::transaction(function () use ($pending, $successNum) {
+                DB::transaction(function () use ($pending, &$successNum) {
                     History::create([
                         'user_id' => $pending->user_id,
                         'amount' => $pending->amount,
