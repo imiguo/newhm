@@ -12,9 +12,9 @@ class History extends Model
 
     protected $guarded = [];
 
-    public function user()
+    public function investor()
     {
-        return $this->belongsTo(User::class, 'user_id', 'id');
+        return $this->belongsTo(Investor::class, 'user_id', 'id');
     }
 
     public function deposit()

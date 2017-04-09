@@ -17,6 +17,7 @@
     "vue": "^2.1.10"
   },
   "dependencies": {
-    "graceful-fs": "^4.1.11"
+    "graceful-fs": "^4.1.11",
+    "sweetalert": "^1.1.3"
   }
 }

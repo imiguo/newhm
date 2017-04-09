@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Hub\PerfectMoney;
+namespace App\Hub;
 
 use GuzzleHttp\Client;
 

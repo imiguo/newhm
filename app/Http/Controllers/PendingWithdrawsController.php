@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\History;
-use App\Hub\PerfectMoney\PerfectMoney;
+use App\Hub\PerfectMoney;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Flash;
 
 class PendingWithdrawsController extends Controller
 {
@@ -23,10 +24,8 @@ class PendingWithdrawsController extends Controller
             ->where('ec', config('perfectmoney.ec_id'))
             ->get();
         foreach ($pendings as $pending) {
-            $res = PerfectMoney::sendMoney($pending->user->perfectmoney_account, abs($pending->amount));
-            if (isset($res['ERROR'])) {
-                flash('error happened: ' . $res['ERROR'], 'danger');
-            }
+            if (!$pending->investor->perfectmoney_account) continue;
+            $res = PerfectMoney::sendMoney($pending->investor->perfectmoney_account, abs($pending->amount));
             if ($res && !isset($res['ERROR'])) {
                 DB::transaction(function () use ($pending) {
                     History::create([
@@ -41,6 +40,11 @@ class PendingWithdrawsController extends Controller
                     $pending->delete();
                 });
             }
+        }
+        if (isset($res['ERROR'])) {
+            Flash::error('error happened: ' . $res['ERROR']);
+        } else {
+            Flash::success('procoss withdraw pending success!!!');
         }
         return redirect('/withdraw/pendings');
     }
