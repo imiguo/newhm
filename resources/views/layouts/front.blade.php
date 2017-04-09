@@ -103,7 +103,6 @@
                     <a href="{{ url('/login') }}">Login</a>
                     <a href="{{ url('/register') }}">Register</a>
                 @endif
-                <a href="{{ url('/index') }}">Index</a>
                 <a href="{{ url('/rules') }}">Rules</a>
                 <a href="{{ url('/faq') }}">Faq</a>
                 <a href="{{ url('/aboutus') }}">Aboutus</a>
