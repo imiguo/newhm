@@ -23,11 +23,16 @@ class PendingWithdrawsController extends Controller
             ->where('type', 'withdraw_pending')
             ->where('ec', config('perfectmoney.ec_id'))
             ->get();
+        $successNum = 0;
         foreach ($pendings as $pending) {
             if (!$pending->investor->perfectmoney_account) continue;
             $res = PerfectMoney::sendMoney($pending->investor->perfectmoney_account, abs($pending->amount));
+            if (isset($res['ERROR'])) {
+                Flash::error('error happened: ' . $res['ERROR']);
+                return redirect('/withdraw/pendings');
+            }
             if ($res && !isset($res['ERROR'])) {
-                DB::transaction(function () use ($pending) {
+                DB::transaction(function () use ($pending, $successNum) {
                     History::create([
                         'user_id' => $pending->user_id,
                         'amount' => $pending->amount,
@@ -38,13 +43,17 @@ class PendingWithdrawsController extends Controller
                         'ec' => config('perfectmoney.ec_id'),
                     ]);
                     $pending->delete();
+                    $successNum++;
                 });
             }
         }
-        if (isset($res['ERROR'])) {
-            Flash::error('error happened: ' . $res['ERROR']);
+        $failNum = count($pendings) - $successNum;
+        if (! $failNum) {
+            Flash::success('all process success!!!');
+        } elseif (! $successNum)  {
+            Flash::error('all process fail!!!');
         } else {
-            Flash::success('procoss withdraw pending success!!!');
+            Flash::info("$successNum process success,but $failNum process fail");
         }
         return redirect('/withdraw/pendings');
     }
