@@ -40,7 +40,7 @@ class PendingWithdrawsController extends Controller
             $pm = new PerfectMoney;
             $description = 'withdrawal from ' . config('app.name');
             $payment_id = $pending->id . '-' . time();
-            $res = $pm->sendMoney(abs($pending->amount), $pending->investor->perfectmoney_account, $description, $payment_id);
+            $res = $pm->sendMoney($pending->investor->perfectmoney_account, abs($pending->amount), $description, $payment_id);
             if ($res['status'] == 'error') {
                 Flash::error('error happened: ' . $res['message']);
                 return redirect('/withdraw/pendings');
