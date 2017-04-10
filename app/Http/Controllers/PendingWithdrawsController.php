@@ -45,7 +45,7 @@ class PendingWithdrawsController extends Controller
                 Flash::error('error happened: ' . $res['message']);
                 return redirect('/withdraw/pendings');
             }
-            $pending->payment_batch_num = $res['data']['payment_batch_num'];
+            $pending->payment_batch_num = $res['data']['PAYMENT_BATCH_NUM'];
             $this->withdrawResolved($pending, $successNum);
         }
         $failNum = count($pendings) - $successNum;
