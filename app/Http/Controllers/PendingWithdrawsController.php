@@ -30,6 +30,7 @@ class PendingWithdrawsController extends Controller
             $description = 'withdrawal from ' . config('app.name');
             $payment_id = $pending->id . '-' . time();
             $res = $pm->sendMoney(abs($pending->amount), $pending->investor->perfectmoney_account, $description, $payment_id);
+            $pending->payment_batch_num = $res['data']['payment_batch_num'];
             if ($res['status'] == 'error') {
                 Flash::error('error happened: ' . $res['message']);
                 return redirect('/withdraw/pendings');
@@ -58,6 +59,7 @@ class PendingWithdrawsController extends Controller
                 'date' => DB::raw('now()'),
                 'description' => 'Withdrawal processed',
                 'ec' => config('perfectmoney.ec_id'),
+                'payment_batch_num' => $pending->payment_batch_num,
             ]);
             $pending->delete();
             $successNum++;
