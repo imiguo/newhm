@@ -168,6 +168,7 @@ return [
          */
         Laravel\Tinker\TinkerServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
+        charlesassets\LaravelPerfectMoney\LaravelPerfectMoneyServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -228,6 +229,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Flash' => Laracasts\Flash\Flash::class,
+        'PerfectMoney' => charlesassets\LaravelPerfectMoney\PerfectMoney::class,
     ],
 
 ];
