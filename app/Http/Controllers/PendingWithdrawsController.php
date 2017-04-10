@@ -18,7 +18,7 @@ class PendingWithdrawsController extends Controller
             $res = $pm->getBalance();
             $balance = '--';
             if ($res['status'] == 'success') {
-                $balance = '$ ' . $res['USD'];
+                $balance = '$ ' . $res['balance']['balance'];
             }
             return $balance;
         });
