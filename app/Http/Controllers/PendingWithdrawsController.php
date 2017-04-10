@@ -6,14 +6,25 @@ use App\History;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Flash;
+use Illuminate\Support\Facades\Cache;
 use PerfectMoney;
 
 class PendingWithdrawsController extends Controller
 {
     public function index()
     {
+        $balance = Cache::remember('perfect_money.balance', 10, function () {
+            $pm = new PerfectMoney;
+            $res = $pm->getBalance();
+            $balance = '--';
+            if ($res['status'] == 'success') {
+                $balance = '$ ' . $res['USD'];
+            }
+            return $balance;
+        });
+
         $pendings = History::where('type', 'withdraw_pending')->get();
-        return view('pending_withdraws.index', compact('pendings'));
+        return view('pending_withdraws.index', compact('pendings', 'balance'));
     }
 
     public function process(Request $request)
@@ -45,6 +56,7 @@ class PendingWithdrawsController extends Controller
         } else {
             Flash::info("$successNum process success,but $failNum process fail");
         }
+        Cache::forget('perfect_money.balance');
         return redirect('/withdraw/pendings');
     }
 

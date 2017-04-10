@@ -46,6 +46,7 @@
             </label>
         </div>
         <h3 id="total-amount">Total: $<span>0</span></h3>
+        <h3>Balance: <span>{{ $balance }}</span></h3>
         <p><button type="submit" class="btn btn-lg">Process</button></p>
     </div>
     <!-- /.box-body -->

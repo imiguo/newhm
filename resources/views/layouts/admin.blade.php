@@ -73,7 +73,17 @@
                     <ul class="nav navbar-nav">
                         <li class="{{ (Request::is('withdraw/pendings') ? ' active' : '') }}">
                             <a class="navbar-brand" href="{{ url('/withdraw/pendings') }}">
-                                Withdraw Pending
+                                Pending
+                            </a>
+                        </li>
+                        <li class="{{ (Request::is('history/deposits') ? ' active' : '') }}">
+                            <a class="navbar-brand" href="{{ url('/history/deposits') }}">
+                                Deposits
+                            </a>
+                        </li>
+                        <li class="{{ (Request::is('history/withdraws') ? ' active' : '') }}">
+                            <a class="navbar-brand" href="{{ url('/history/withdraws') }}">
+                                Withdraws
                             </a>
                         </li>
                     </ul>

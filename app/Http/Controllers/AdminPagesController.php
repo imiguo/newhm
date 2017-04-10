@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use PerfectMoney;
 
 class AdminPagesController extends Controller
 {
