@@ -70,7 +70,7 @@ class PendingWithdrawsController extends Controller
                 'type' => 'withdrawal',
                 'date' => DB::raw('now()'),
                 'description' => 'Withdrawal processed',
-                'ec' => config('perfectmoney.ec_id'),
+                'ec' => config('hm.ec_id'),
                 'payment_batch_num' => $pending->payment_batch_num,
             ]);
             $pending->delete();
