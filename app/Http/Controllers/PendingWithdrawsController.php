@@ -41,11 +41,11 @@ class PendingWithdrawsController extends Controller
             $description = 'withdrawal from ' . config('app.name');
             $payment_id = $pending->id . '-' . time();
             $res = $pm->sendMoney(abs($pending->amount), $pending->investor->perfectmoney_account, $description, $payment_id);
-            $pending->payment_batch_num = $res['data']['payment_batch_num'];
             if ($res['status'] == 'error') {
                 Flash::error('error happened: ' . $res['message']);
                 return redirect('/withdraw/pendings');
             }
+            $pending->payment_batch_num = $res['data']['payment_batch_num'];
             $this->withdrawResolved($pending, $successNum);
         }
         $failNum = count($pendings) - $successNum;
