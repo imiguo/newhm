@@ -10,7 +10,7 @@
     {{ csrf_field() }}
     <div class="panel panel-heading">
         <div class="panel-header">
-            <h3 class="box-title">Deposits History</h3>
+            <h3 class="box-title">Withdraws History</h3>
         </div>
         <!-- /.box-header -->
         <div class="panel-body table-responsive no-padding">
