@@ -27,6 +27,20 @@
             padding-top: 100px;
         }
 
+        .swag-line:before {
+            content: '';
+            position: absolute;
+            display: block;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            z-index: 2000;
+            background-color: #ac2aa1;
+            background: -webkit-linear-gradient(45deg, #6b15a1, #ac2aa1);
+            background: linear-gradient(45deg, #6b15a1, #ac2aa1);
+        }
+
         .top-right {
             position: absolute;
             right: 10px;
@@ -85,7 +99,7 @@
     </script>
 </head>
 <body>
-    <div id="app">
+    <div id="app" class="swag-line">
         @if (Route::has('login'))
             <div class="top-right links">
                 <a href="{{ url('/') }}">Home</a>

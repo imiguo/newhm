@@ -18,6 +18,21 @@
     body {
         background-color: #f5f8fa;
     }
+
+    .swag-line:before {
+        content: '';
+        position: absolute;
+        display: block;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 5px;
+        z-index: 2000;
+        background-color: #ac2aa1;
+        background: -webkit-linear-gradient(45deg, #6b15a1, #ac2aa1);
+        background: linear-gradient(45deg, #6b15a1, #ac2aa1);
+    }
+
     .navbar-default .navbar-nav > .active > a {
         color: inherit;
         background-color: inherit;
@@ -48,7 +63,7 @@
     </script>
 </head>
 <body>
-    <div id="app">
+    <div id="app" class="swag-line">
         <nav class="navbar navbar-default navbar-static-top">
             <div class="container">
                 <div class="navbar-header">
