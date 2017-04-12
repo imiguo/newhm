@@ -21,7 +21,7 @@ class PendingWithdrawsController extends Controller
             } catch (PerfectMoneyException $e) {
                 $balance = '-- (' . $e->getMessage() . ')';
             } catch (\Exception $e) {
-                $balance = '-- (unknown error)';
+                $balance = '-- (unknown error)' . $e->getMessage();
             }
             return $balance;
         });
