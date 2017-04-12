@@ -7,18 +7,21 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Flash;
 use Illuminate\Support\Facades\Cache;
-use PerfectMoney;
+use Facades\entimm\LaravelPerfectMoney\PerfectMoney;
+use entimm\LaravelPerfectMoney\PerfectMoneyException;
 
 class PendingWithdrawsController extends Controller
 {
     public function index()
     {
         $balance = Cache::remember('perfect_money.balance', 10, function () {
-            $pm = new PerfectMoney;
-            $res = $pm->getBalance();
-            $balance = '--';
-            if ($res['status'] == 'success') {
+            try {
+                $res = PerfectMoney::getBalance();
                 $balance = '$ ' . $res['balance']['balance'];
+            } catch (PerfectMoneyException $e) {
+                $balance = '-- (' . $e->getMessage() . ')';
+            } catch (\Exception $e) {
+                $balance = '-- (unknown error)';
             }
             return $balance;
         });
@@ -37,15 +40,15 @@ class PendingWithdrawsController extends Controller
         $successNum = 0;
         foreach ($pendings as $pending) {
             if (!$pending->investor->perfectmoney_account) continue;
-            $pm = new PerfectMoney;
             $description = 'withdrawal from ' . config('app.name');
             $payment_id = $pending->id . '-' . time();
-            $res = $pm->sendMoney($pending->investor->perfectmoney_account, abs($pending->amount), $description, $payment_id);
-            if ($res['status'] == 'error') {
-                Flash::error('error happened: ' . $res['message']);
+            try {
+                $res = PerfectMoney::sendMoney($pending->investor->perfectmoney_account, abs($pending->amount), $description, $payment_id);
+                $pending->payment_batch_num = $res['payment_batch_num'];
+            } catch (PerfectMoneyException $e) {
+                Flash::error('error happened: ' . $e->getMessage());
                 return redirect('/withdraw/pendings');
             }
-            $pending->payment_batch_num = $res['data']['PAYMENT_BATCH_NUM'];
             $this->withdrawResolved($pending, $successNum);
         }
         $failNum = count($pendings) - $successNum;
