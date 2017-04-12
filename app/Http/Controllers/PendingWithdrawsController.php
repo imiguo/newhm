@@ -17,7 +17,7 @@ class PendingWithdrawsController extends Controller
         $balance = Cache::remember('perfect_money.balance', 10, function () {
             try {
                 $res = PerfectMoney::getBalance();
-                $balance = '$ ' . $res['balance']['balance'];
+                $balance = '$ ' . $res['balance'];
             } catch (PerfectMoneyException $e) {
                 $balance = '-- (' . $e->getMessage() . ')';
             } catch (\Exception $e) {
