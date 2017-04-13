@@ -168,7 +168,7 @@ return [
          */
         Laravel\Tinker\TinkerServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
-        entimm\LaravelPerfectMoney\LaravelPerfectMoneyServiceProvider::class,
+        entimm\LaravelPerfectMoney\PerfectMoneyServiceProvider::class,
 
         /*
          * Application Service Providers...
