@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\History;
+use App\Services\Mail;
 use Illuminate\Http\Request;
 use DB;
 use Cache;
@@ -78,6 +79,15 @@ class PendingWithdrawsController extends Controller
             ]);
             $pending->delete();
             $successNum++;
+
+            $mailData = [
+                'name' => $pending->investor->name,
+                'amount' => $pending->amount,
+                'batch' => $pending->payment_batch_num,
+                'account' => $pending->investor->perfectmoney_account,
+                'currency' => 'PerfectMoney',
+            ];
+            Mail::send($pending->investor->email, 'withdraw_user_notification', $mailData);
         });
     }
 }
