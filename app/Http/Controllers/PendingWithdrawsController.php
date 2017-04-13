@@ -82,7 +82,7 @@ class PendingWithdrawsController extends Controller
 
             $mailData = [
                 'name' => $pending->investor->name,
-                'amount' => $pending->amount,
+                'amount' => abs($pending->amount),
                 'batch' => $pending->payment_batch_num,
                 'account' => $pending->investor->perfectmoney_account,
                 'currency' => 'PerfectMoney',

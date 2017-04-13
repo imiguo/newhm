@@ -22,7 +22,7 @@ class Mail
             $subject = preg_replace(''.'/#'.$k.'#/', $v, $subject);
         }
 
-        $from = config('hm.mailer');
-        return mail($to, $subject, $text, ''.'From: '.$from.'Reply-To: '.$from);
+        $from = config('app.name');
+        return mail($to, $subject, $text, ''.'From: '.$from);
     }
 }
