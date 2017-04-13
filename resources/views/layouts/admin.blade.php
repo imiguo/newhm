@@ -137,12 +137,10 @@
 
         <div class="container">
             @if (session()->has('flash_notification.message'))
-                <div class="container">
-                    <div class="alert alert-{{ session('flash_notification.level') }}">
-                        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <div class="alert alert-{{ session('flash_notification.level') }}">
+                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 
-                        {!! session('flash_notification.message') !!}
-                    </div>
+                    {!! session('flash_notification.message') !!}
                 </div>
             @endif
             @yield('content')
