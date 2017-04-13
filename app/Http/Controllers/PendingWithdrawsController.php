@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\History;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use DB;
+use Cache;
 use Flash;
-use Illuminate\Support\Facades\Cache;
-use Facades\entimm\LaravelPerfectMoney\PerfectMoney;
+use PerfectMoney;
 use entimm\LaravelPerfectMoney\PerfectMoneyException;
 
 class PendingWithdrawsController extends Controller

@@ -229,7 +229,7 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
         'Flash' => Laracasts\Flash\Flash::class,
-        'PerfectMoney' => entimm\LaravelPerfectMoney\PerfectMoney::class,
+        'PerfectMoney' => entimm\LaravelPerfectMoney\Facade\PerfectMoney::class,
     ],
 
 ];
