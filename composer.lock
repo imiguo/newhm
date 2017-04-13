@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "6688e8b79efc9aa1a12e9d9af63094a0",
+    "content-hash": "067cd3ab118caa6c9b0cad695b423704",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -108,16 +108,16 @@
         },
         {
             "name": "entimm/laravel-perfectmoney",
-            "version": "0.0.1",
+            "version": "0.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/entimm/laravel-perfectmoney.git",
-                "reference": "48bc9954dd6a74216696c3d66ace91fb7e8b7f5b"
+                "reference": "e7f5d4e96ca8959ac4b040a3a3f9f33aea787fc8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/entimm/laravel-perfectmoney/48bc9954dd6a74216696c3d66ace91fb7e8b7f5b.zip",
-                "reference": "48bc9954dd6a74216696c3d66ace91fb7e8b7f5b",
+                "url": "https://files.phpcomposer.com/files/entimm/laravel-perfectmoney/e7f5d4e96ca8959ac4b040a3a3f9f33aea787fc8.zip",
+                "reference": "e7f5d4e96ca8959ac4b040a3a3f9f33aea787fc8",
                 "shasum": ""
             },
             "require": {
@@ -148,7 +148,7 @@
                 "laravel",
                 "perfect money"
             ],
-            "time": "2017-04-12T16:36:26+00:00"
+            "time": "2017-04-13T14:02:26+00:00"
         },
         {
             "name": "erusev/parsedown",
@@ -2393,16 +2393,16 @@
         },
         {
             "name": "myclabs/deep-copy",
-            "version": "1.6.0",
+            "version": "1.6.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/myclabs/DeepCopy.git",
-                "reference": "5a5a9fc8025a08d8919be87d6884d5a92520cefe"
+                "reference": "8e6e04167378abf1ddb4d3522d8755c5fd90d102"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/myclabs/DeepCopy/5a5a9fc8025a08d8919be87d6884d5a92520cefe.zip",
-                "reference": "5a5a9fc8025a08d8919be87d6884d5a92520cefe",
+                "url": "https://files.phpcomposer.com/files/myclabs/DeepCopy/8e6e04167378abf1ddb4d3522d8755c5fd90d102.zip",
+                "reference": "8e6e04167378abf1ddb4d3522d8755c5fd90d102",
                 "shasum": ""
             },
             "require": {
@@ -2431,7 +2431,7 @@
                 "object",
                 "object graph"
             ],
-            "time": "2017-01-26T22:05:40+00:00"
+            "time": "2017-04-12T18:52:22+00:00"
         },
         {
             "name": "phpdocumentor/reflection-common",
