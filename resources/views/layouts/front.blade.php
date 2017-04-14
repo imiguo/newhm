@@ -104,6 +104,9 @@
             <div class="top-right links">
                 <a href="{{ url('/') }}">Home</a>
                 @if (Auth::check())
+                    @if (Auth::user()->is_admin)
+                        <a href="{{ url('/admin') }}">Admin</a>
+                    @endif
                     <a href="{{ route('logout') }}"
                        onclick="event.preventDefault();
                                                      document.getElementById('logout-form').submit();">
