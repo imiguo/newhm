@@ -108,16 +108,16 @@
         },
         {
             "name": "entimm/laravel-perfectmoney",
-            "version": "0.1.8",
+            "version": "0.1.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/entimm/laravel-perfectmoney.git",
-                "reference": "d8f846cdf0974e0ea0f63df06e4c7de076460056"
+                "reference": "655cade13b2713b7d43a0116fefc4f989336b08c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://files.phpcomposer.com/files/entimm/laravel-perfectmoney/d8f846cdf0974e0ea0f63df06e4c7de076460056.zip",
-                "reference": "d8f846cdf0974e0ea0f63df06e4c7de076460056",
+                "url": "https://files.phpcomposer.com/files/entimm/laravel-perfectmoney/655cade13b2713b7d43a0116fefc4f989336b08c.zip",
+                "reference": "655cade13b2713b7d43a0116fefc4f989336b08c",
                 "shasum": ""
             },
             "require": {
@@ -148,7 +148,7 @@
                 "laravel",
                 "perfect money"
             ],
-            "time": "2017-04-13T14:57:06+00:00"
+            "time": "2017-04-16T17:22:36+00:00"
         },
         {
             "name": "erusev/parsedown",
