@@ -50,7 +50,7 @@
                                         <tr>
                                             <td>{{ $plan->id }}</td>
                                             <td>{{ $plan->name }}</td>
-                                            <td>${{ $plan->mix }} - ${{ $plan->max ?: 'unlimited' }}</td>
+                                            <td>${{ $plan->min }} - ${{ $plan->max > 0 ? $plan->max : 'unlimited' }}</td>
                                             <td>{{ $plan->percent }}%</td>
                                             <td>{{ $plan->status ? 'opened' : 'closed' }}</td>
                                             <td>
