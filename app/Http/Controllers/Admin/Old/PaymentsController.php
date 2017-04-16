@@ -1,21 +1,22 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin\Old;
 
-use App\History;
-use App\Services\Mail;
+use App\Http\Controllers\Controller;
+use App\Models\Old\History;
+use App\Services\MailService;
 use Illuminate\Http\Request;
-use DB;
-use Cache;
-use Flash;
-use PerfectMoney;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Cache;
+use Laracasts\Flash\Flash;
+use entimm\LaravelPerfectMoney\Facade\PerfectMoney;
 use entimm\LaravelPerfectMoney\PerfectMoneyException;
 
-class PendingWithdrawsController extends Controller
+class PaymentsController extends Controller
 {
-    public function index()
+    public function withdrawList()
     {
-        $balance = Cache::remember('perfect_money.balance', 10, function () {
+        $balance = Cache::remember('perfectmoney.balance', 10, function () {
             try {
                 $res = PerfectMoney::getBalance();
                 $balance = '$ ' . $res[config('perfectmoney.marchant_id')];
@@ -28,10 +29,10 @@ class PendingWithdrawsController extends Controller
         });
 
         $pendings = History::where('type', 'withdraw_pending')->get();
-        return view('pending_withdraws.index', compact('pendings', 'balance'));
+        return view('payments.withdraw_list', compact('pendings', 'balance'));
     }
 
-    public function process(Request $request)
+    public function withdrawProcess(Request $request)
     {
         $pendingIds = $request->get('pendingIds');
         $pendings = History::whereIn('id', $pendingIds ?: [])
@@ -40,11 +41,11 @@ class PendingWithdrawsController extends Controller
             ->get();
         $successNum = 0;
         foreach ($pendings as $pending) {
-            if (!$pending->investor->perfectmoney_account) continue;
+            if (!$pending->user->perfectmoney_account) continue;
             $description = 'withdrawal from ' . config('app.name');
             $payment_id = $pending->id . '-' . time();
             try {
-                $res = PerfectMoney::sendMoney($pending->investor->perfectmoney_account, abs($pending->amount), $description, $payment_id);
+                $res = PerfectMoney::sendMoney($pending->user->perfectmoney_account, abs($pending->amount), $description, $payment_id);
                 $pending->payment_batch_num = $res['payment_batch_num'];
             } catch (PerfectMoneyException $e) {
                 Flash::error('error happened: ' . $e->getMessage());
@@ -60,7 +61,7 @@ class PendingWithdrawsController extends Controller
         } else {
             Flash::info("$successNum process success,but $failNum process fail");
         }
-        Cache::forget('perfect_money.balance');
+        Cache::forget('perfectmoney.balance');
         return redirect('/withdraw/pendings');
     }
 
@@ -81,13 +82,13 @@ class PendingWithdrawsController extends Controller
             $successNum++;
 
             $mailData = [
-                'name' => $pending->investor->name,
+                'name' => $pending->user->name,
                 'amount' => abs($pending->amount),
                 'batch' => $pending->payment_batch_num,
-                'account' => $pending->investor->perfectmoney_account,
+                'account' => $pending->user->perfectmoney_account,
                 'currency' => 'PerfectMoney',
             ];
-            Mail::send($pending->investor->email, 'withdraw_user_notification', $mailData);
+            MailService::templateSend($pending->user, 'withdraw_user_notification', $mailData);
         });
     }
 }

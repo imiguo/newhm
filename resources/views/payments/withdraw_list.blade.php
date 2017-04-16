@@ -7,16 +7,14 @@
 </style>
 
 @section('content')
-<form action="/withdraw/process" method="POST" id="process-form">
+<form action="/old/withdraw/process" method="POST" id="process-form">
 {{ csrf_field() }}
-<div class="panel panel-heading">
-    <div class="panel-header">
+<div class="panel panel-default">
+    <div class="panel-body table-responsive">
         <h3 class="box-title">Withdraw Pendings</h3>
-    </div>
-    <!-- /.box-header -->
-    <div class="panel-body table-responsive no-padding">
-        <table class="table table-hover">
-            <tbody><tr>
+        <table class="table table-hover table-striped">
+            <tbody>
+            <tr class="title">
                 <th>UserId</th>
                 <th>User</th>
                 <th>Amount</th>
@@ -27,10 +25,10 @@
             </tr>
             @foreach($pendings as $pending)
             <tr>
-                <td>{{ $pending->investor->id }}</td>
-                <td>{{ $pending->investor->username }}</td>
+                <td>{{ $pending->user->id }}</td>
+                <td>{{ $pending->user->username }}</td>
                 <td>{{ abs($pending->amount) }}</td>
-                <td>{{ $pending->investor->perfectmoney_account }}</td>
+                <td>{{ $pending->user->perfectmoney_account }}</td>
                 <td>{{ $pending->date }}</td>
                 <td>{{ $pending->description }}</td>
                 <td>

@@ -20,13 +20,13 @@ class CreateUsersTable extends Migration
             $table->string('email', 60)->unique();
             $table->string('password');
             $table->string('full_name', 60)->default('');
-            $table->string('perfect_money', 30)->default('');
+            $table->string('perfectmoney', 30)->default('');
             $table->string('question')->default('');
             $table->string('answer')->default('');
-            $table->integer('ref')->default(0);
+            $table->unsignedInteger('ref')->default('0');
             $table->string('come_from')->default('');
-            $table->tinyInteger('status')->default(1);
-            $table->tinyInteger('is_admin')->default(0);
+            $table->unsignedTinyInteger('status')->default('1');
+            $table->unsignedTinyInteger('is_admin')->default('0');
             $table->rememberToken();
             $table->timestamps();
         });
@@ -39,6 +39,6 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('users');
     }
 }

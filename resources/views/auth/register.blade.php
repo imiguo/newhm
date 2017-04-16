@@ -74,15 +74,15 @@
                             </div>
                         </div>
 
-                        <div class="form-group{{ $errors->has('perfect_money') ? ' has-error' : '' }}">
-                            <label for="perfect_money" class="col-md-4 control-label">Perfect Money Account</label>
+                        <div class="form-group{{ $errors->has('perfectmoney') ? ' has-error' : '' }}">
+                            <label for="perfectmoney" class="col-md-4 control-label">Perfect Money Account</label>
 
                             <div class="col-md-6">
-                                <input id="perfect_money" type="text" class="form-control" name="perfect_money" value="{{ old('perfect_money') }}" required autofocus>
+                                <input id="perfectmoney" type="text" class="form-control" name="perfectmoney" value="{{ old('perfectmoney') }}" required autofocus>
 
-                                @if ($errors->has('perfect_money'))
+                                @if ($errors->has('perfectmoney'))
                                     <span class="help-block">
-                                        <strong>{{ $errors->first('perfect_money') }}</strong>
+                                        <strong>{{ $errors->first('perfectmoney') }}</strong>
                                     </span>
                                 @endif
                             </div>

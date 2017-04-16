@@ -52,6 +52,13 @@
         border-radius: 4px;
         color: #fff;
     }
+    .box-title {
+        margin-top: 0;
+    }
+    .table > tbody > tr.title > th {
+        background-color: #d6d7fc;
+        color: #8a4ca4;
+    }
     @show
     </style>
 
@@ -77,7 +84,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    <a class="navbar-brand" href="{{ url('/admin') }}">
+                    <a class="navbar-brand" href="{{ url('admin') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>
 
@@ -86,20 +93,18 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        <li class="{{ (Request::is('withdraw/pendings') ? ' active' : '') }}">
-                            <a class="navbar-brand" href="{{ url('/withdraw/pendings') }}">
-                                Pending
-                            </a>
+                        <li><a class="navbar-brand" href="{{ url('/') }}"> Home </a></li>
+                        <li class="{{ (Request::is('old/withdraw/pendings') ? ' active' : '') }}">
+                            <a class="navbar-brand" href="{{ url('old/withdraw/pendings') }}"> Pending </a>
                         </li>
-                        <li class="{{ (Request::is('history/deposits') ? ' active' : '') }}">
-                            <a class="navbar-brand" href="{{ url('/history/deposits') }}">
-                                Deposits
-                            </a>
+                        <li class="{{ (Request::is('old/history/deposits') ? ' active' : '') }}">
+                            <a class="navbar-brand" href="{{ url('old/history/deposits') }}"> Deposits </a>
                         </li>
-                        <li class="{{ (Request::is('history/withdraws') ? ' active' : '') }}">
-                            <a class="navbar-brand" href="{{ url('/history/withdraws') }}">
-                                Withdraws
-                            </a>
+                        <li class="{{ (Request::is('old/history/withdraws') ? ' active' : '') }}">
+                            <a class="navbar-brand" href="{{ url('old/history/withdraws') }}"> Withdraws </a>
+                        </li>
+                        <li class="{{ (Request::is('packages') ? ' active' : '') }}">
+                            <a class="navbar-brand" href="{{ url('packages') }}"> Packages </a>
                         </li>
                     </ul>
 

@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SupportRequest;
-use App\Support;
-use Flash;
+use App\Models\Support;
+use Laracasts\Flash\Flash;
 
 class SupportsController extends Controller
 {

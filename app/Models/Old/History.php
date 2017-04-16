@@ -1,6 +1,6 @@
 <?php
 
-namespace App;
+namespace App\Models\Old;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -8,13 +8,15 @@ class History extends Model
 {
     public $timestamps = false;
 
+    protected $connection = 'mysql_old';
+
     protected $table = 'hm2_history';
 
     protected $guarded = [];
 
-    public function investor()
+    public function user()
     {
-        return $this->belongsTo(Investor::class, 'user_id', 'id');
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
     public function deposit()

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateSupportsTable extends Migration
+class CreatePackagesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreateSupportsTable extends Migration
      */
     public function up()
     {
-        Schema::create('supports', function(Blueprint $table)
-        {
+        Schema::create('packages', function(Blueprint $table) {
             $table->increments('id');
-            $table->unsignedInteger('user_id')->default('0');
-            $table->string('name', 60);
-            $table->string('email', 60);
-            $table->string('title');
-            $table->text('content');
+            $table->string('name', 30)->default('');
+            $table->unsignedInteger('days');
+            $table->decimal('commission_rate')->default('0');
+            $table->text('description')->default('');
+            $table->unsignedTinyInteger('status')->default('1');
             $table->timestamps();
         });
     }
@@ -32,6 +31,6 @@ class CreateSupportsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('supports');
+        Schema::dropIfExists('plan_types');
     }
 }

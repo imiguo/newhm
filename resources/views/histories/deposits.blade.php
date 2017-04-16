@@ -7,15 +7,12 @@
 </style>
 
 @section('content')
-    {{ csrf_field() }}
-    <div class="panel panel-heading">
-        <div class="panel-header">
+    <div class="panel panel-default">
+        <div class="panel-body table-responsive">
             <h3 class="box-title">Deposits History</h3>
-        </div>
-        <!-- /.box-header -->
-        <div class="panel-body table-responsive no-padding">
-            <table class="table table-hover">
-                <tbody><tr>
+            <table class="table table-hover table-striped">
+                <tbody>
+                <tr class="title">
                     <th>Id</th>
                     <th>User</th>
                     <th>Amount</th>
@@ -25,7 +22,7 @@
                 @foreach($deposits as $deposit)
                     <tr>
                         <td>{{ $deposit->id }}</td>
-                        <td>{{ $deposit->investor->username }}</td>
+                        <td>{{ $deposit->user->username }}</td>
                         <td>{{ abs($deposit->amount) }}</td>
                         <td>{{ $deposit->date }}</td>
                         <td>{{ $deposit->description }}</td>

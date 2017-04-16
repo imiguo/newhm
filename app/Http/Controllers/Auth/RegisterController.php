@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\User;
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -48,7 +48,7 @@ class RegisterController extends Controller
             'full_name' => 'required|max:60',
             'question' => 'max:255',
             'answer' => 'max:255',
-            'perfect_money' => 'max:30',
+            'perfectmoney' => 'max:30',
         ]);
     }
 
@@ -67,7 +67,7 @@ class RegisterController extends Controller
             'full_name' => $data['full_name'],
             'question' => $data['question'],
             'answer' => $data['answer'],
-            'perfect_money' => $data['perfect_money'],
+            'perfectmoney' => $data['perfectmoney'],
         ]);
     }
 

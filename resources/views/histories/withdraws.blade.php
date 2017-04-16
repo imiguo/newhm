@@ -7,15 +7,12 @@
 </style>
 
 @section('content')
-    {{ csrf_field() }}
-    <div class="panel panel-heading">
-        <div class="panel-header">
+    <div class="panel panel-default">
+        <div class="panel-body table-responsive">
             <h3 class="box-title">Withdraws History</h3>
-        </div>
-        <!-- /.box-header -->
-        <div class="panel-body table-responsive no-padding">
-            <table class="table table-hover">
-                <tbody><tr>
+            <table class="table table-hover table-striped">
+                <tbody>
+                <tr class="title">
                     <th>Id</th>
                     <th>User</th>
                     <th>Amount</th>
@@ -25,7 +22,7 @@
                 @foreach($withdraws as $withdraw)
                     <tr>
                         <td>{{ $withdraw->id }}</td>
-                        <td>{{ $withdraw->investor->username }}</td>
+                        <td>{{ $withdraw->user->username }}</td>
                         <td>{{ abs($withdraw->amount) }}</td>
                         <td>{{ $withdraw->date }}</td>
                         <td>{{ $withdraw->payment_batch_num or '-' }}</td>

@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\User;
+use App\Models\User;
 use Illuminate\Console\Command;
 
 class MakeAdmin extends Command
@@ -49,7 +49,7 @@ class MakeAdmin extends Command
                 $user->save();
                 $this->info('reset admin success');
             } else {
-                $this->error('already exist an investor with the email');
+                $this->error('already exist an user with the email');
             }
         } else {
             User::create([

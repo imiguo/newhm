@@ -1,12 +1,13 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin\Old;
 
-use App\History;
+use App\Http\Controllers\Controller;
+use App\Models\Old\History;
 
 class HistoryController extends Controller
 {
-    public function showDeposits()
+    public function deposits()
     {
         $deposits = History::where('type', 'add_funds')->get();
         $total = 0;
@@ -16,7 +17,7 @@ class HistoryController extends Controller
         return view('histories.deposits', compact('deposits', 'total'));
     }
 
-    public function showWithdraws()
+    public function withdraws()
     {
         $withdraws = History::where('type', 'withdrawal')->get();
         $total = 0;

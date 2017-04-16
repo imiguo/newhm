@@ -63,7 +63,6 @@
             font-weight: 600;
             letter-spacing: .1rem;
             text-decoration: none;
-            text-transform: uppercase;
         }
 
         .m-b-md {
@@ -71,8 +70,8 @@
         }
 
         .flash-notification {
-            position: absolute;
             top: 80px;
+            position: inherit;
         }
         .panel {
             background: #ffffff;
@@ -87,6 +86,9 @@
             padding: 7px 24px;
             border-radius: 4px;
             color: #fff;
+        }
+        .box-title {
+            margin-top: 0;
         }
         @yield('styles')
     </style>
@@ -129,7 +131,7 @@
         @endif
 
         <div class="container">
-            <div class="flash-notification">
+            <div class="flash-notification col-md-8 col-md-offset-2">
                 @if (session()->has('flash_notification.message'))
                     <div class="alert alert-{{ session('flash_notification.level') }}">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -139,6 +141,20 @@
                 @endif
             </div>
             @yield('content')
+            @if (Auth::check())
+            <div class="content links" style="margin-top: 0">
+                <a href="/account/summary">Account Summary</a>
+                <a href="/deposit">Make Deposit</a>
+                <a href="/withdraw">Withdraw</a>
+                <a href="/history/deposits">Deposits History</a>
+                <a href="/history/earnings">Earnings History</a>
+                <a href="/history/referrals">Referrals History</a>
+                <a href="/history/withdrawals">Withdrawals History</a>
+                <a href="/referrals">Your Referrals</a>
+                <a href="/account/link">Referral Links</a>
+                <a href="/account/edit">Edit Personal Account</a>
+            </div>
+            @endif
         </div>
 
     </div>

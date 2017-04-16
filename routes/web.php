@@ -18,16 +18,48 @@ Route::get('/faq', 'PagesController@faq');
 Route::get('/aboutus', 'PagesController@aboutus');
 Route::get('/howtoinvest', 'PagesController@howtoinvest');
 
+Route::match(['get', 'post'], '/payment/success', 'PaymentController@success');
+Route::match(['get', 'post'], '/payment/failure', 'PaymentController@failure');
+Route::match(['get', 'post'], '/payment/callback', 'PaymentController@callback');
+
+Route::get('/deposit', 'PaymentController@deposit');
+Route::get('/withdraw', 'PaymentController@withdraw');
+Route::post('/withdraw_process', 'PaymentController@withdrawProcess');
+
+Route::get('/account/summary', 'AccountController@summary');
+
+Route::get('/history/deposits', function () {
+
+});
+Route::get('/history/earnings', function () {
+
+});
+Route::get('/history/referrals', function () {
+
+});
+Route::get('/history/withdrawals', function () {
+
+});
+Route::get('/referrals', 'AccountController@referrals');
+Route::get('/account/link', 'AccountController@link');
+Route::get('/account/edit', 'AccountController@edit');
+Route::patch('/account/update', 'AccountController@update');
+
 Route::get('/support', 'SupportsController@create');
 Route::post('/support', 'SupportsController@store');
 
 Route::group(['middleware' => ['auth', 'admin']], function () {
-    Route::get('/withdraw/pendings', 'PendingWithdrawsController@index');
-    Route::post('/withdraw/process', 'PendingWithdrawsController@process');
-    Route::get('/history/deposits', 'HistoryController@showDeposits');
-    Route::get('/history/withdraws', 'HistoryController@showWithdraws');
+    Route::get('/old/withdraw/pendings', 'Admin\Old\PaymentsController@withdrawList');
+    Route::post('/old/withdraw/process', 'Admin\Old\PaymentsController@withdrawProcess');
+    Route::get('/old/history/deposits', 'Admin\Old\HistoryController@deposits');
+    Route::get('/old/history/withdraws', 'Admin\Old\HistoryController@withdraws');
 
-    Route::get('/admin', 'AdminPagesController@index')->middleware('auth');
+    Route::resource('/packages', 'Admin\PackagesController');
+    Route::resource('/packages/{package}/plan', 'Admin\PlansController', ['only' => [
+        'create', 'store', 'edit', 'update', 'destroy',
+    ]]);
+
+    Route::get('/admin', 'Admin\PagesController@index');
 });
 
 Auth::routes();
