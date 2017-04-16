@@ -18,7 +18,7 @@ class CreatePackagesTable extends Migration
             $table->string('name', 30)->default('');
             $table->unsignedInteger('days');
             $table->decimal('commission_rate')->default('0');
-            $table->text('description')->default('');
+            $table->text('description')->nullable();
             $table->unsignedTinyInteger('status')->default('1');
             $table->timestamps();
         });
