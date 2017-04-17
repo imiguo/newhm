@@ -19,7 +19,7 @@ class MailService
     {
         Mail::to($user)->send(app('App\Mail\CommonMail', [
             'view' => 'emails.' . $templateId,
-            'subject' => config('mail_template.' . $templateId, 'notification'),
+            'subject' => config("mail_template.{$templateId}.subject", 'notification'),
             'data' => $data,
         ]));
     }
