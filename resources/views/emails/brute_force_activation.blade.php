@@ -2,7 +2,7 @@ Someone from IP {{ $ip }} has entered a password for your account "{{ $username 
 
 Click here to activate your account :
 
-{{ $site_url }}?a=activate&code={{ $activation_code }}
+{{ config('app.url') }}?a=activate&code={{ $activation_code }}
 
 Thank you.
-{{ $site_name }}
+{{ config('app.name') }}

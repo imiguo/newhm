@@ -6,5 +6,5 @@ To confirm these changes please use this Confirmation Code:
 {{ $confirmation_code }}
 
 Thank you.
-{{ $site_name }}
-{{ $site_url }}
+{{ config('app.name') }}
+{{ config('app.url') }}

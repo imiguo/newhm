@@ -8,5 +8,5 @@ Compound: {{ $compound }}%.
 
 
 Thank you.
-{{ $site_name }}
-{{ $site_url }}
+{{ config('app.name') }}
+{{ config('app.url') }}

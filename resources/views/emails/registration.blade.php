@@ -6,7 +6,7 @@ Your login information:
 
 Username: {{ $username }}
 
-You can login here: {{ $site_url }}
+You can login here: {{ config('app.url') }}
 
 Contact us immediately if you did not authorize this registration.
 
