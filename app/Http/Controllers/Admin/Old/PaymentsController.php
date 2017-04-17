@@ -49,7 +49,7 @@ class PaymentsController extends Controller
                 $pending->payment_batch_num = $res['payment_batch_num'];
             } catch (PerfectMoneyException $e) {
                 Flash::error('error happened: ' . $e->getMessage());
-                return redirect('/withdraw/pendings');
+                return redirect('/old/withdraw/pendings');
             }
             $this->withdrawResolved($pending, $successNum);
         }
@@ -62,7 +62,7 @@ class PaymentsController extends Controller
             Flash::info("$successNum process success,but $failNum process fail");
         }
         Cache::forget('perfectmoney.balance');
-        return redirect('/withdraw/pendings');
+        return redirect('/old/withdraw/pendings');
     }
 
     private function withdrawResolved($pending, &$successNum)
