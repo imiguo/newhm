@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-use App\Models\Old\Mail;
+use Illuminate\Support\Facades\Mail;
 
 class MailService
 {
