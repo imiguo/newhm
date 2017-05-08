@@ -22,7 +22,7 @@
                 @foreach($deposits as $deposit)
                     <tr>
                         <td>{{ $deposit->id }}</td>
-                        <td>{{ $deposit->user->username }}</td>
+                        <td>{{ isset($deposit->user) ? $deposit->user->username : '' }}</td>
                         <td>{{ abs($deposit->amount) }}</td>
                         <td>{{ $deposit->date }}</td>
                         <td>{{ $deposit->description }}</td>

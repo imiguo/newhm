@@ -22,7 +22,7 @@
                 @foreach($withdraws as $withdraw)
                     <tr>
                         <td>{{ $withdraw->id }}</td>
-                        <td>{{ $withdraw->user->username }}</td>
+                        <td>{{ isset($withdraw->user) ? $withdraw->user->username : '' }}</td>
                         <td>{{ abs($withdraw->amount) }}</td>
                         <td>{{ $withdraw->date }}</td>
                         <td>{{ $withdraw->payment_batch_num or '-' }}</td>
