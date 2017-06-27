@@ -23,6 +23,8 @@ Route::match(['get', 'post'], '/payment/failure', 'PaymentController@failure');
 Route::match(['get', 'post'], '/payment/callback', 'PaymentController@callback');
 
 Route::get('/deposit', 'PaymentController@deposit');
+Route::post('/deposit_confirm', 'PaymentController@depositConfirm');
+
 Route::get('/withdraw', 'PaymentController@withdraw');
 Route::post('/withdraw_process', 'PaymentController@withdrawProcess');
 

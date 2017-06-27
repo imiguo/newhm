@@ -24,9 +24,11 @@ class PackagesController extends Controller
     {
         $this->validate($request, [
             'name' => 'required|max:60',
+            'unit' => 'in:1,2,3',
             'days' => 'integer',
             'commission_rate' => 'numeric',
             'status' => 'in:0,1',
+            'once' => 'in:0,1',
             'description' => 'nullable',
         ]);
         Package::create($request->all());

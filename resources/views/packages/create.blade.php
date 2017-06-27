@@ -29,15 +29,63 @@
                         @endif
                     </div>
                 </div>
-                <div class="form-group{{ $errors->has('days') ? ' has-error' : '' }}">
-                    <label for="days" class="col-md-4 control-label">Days</label>
+                <div class="form-group{{ $errors->has('unit') ? ' has-error' : '' }}">
+                    <label for="unit" class="col-md-4 control-label">Unit</label>
 
                     <div class="col-md-6">
-                        <input id="days" type="number" class="form-control" name="days" value="{{ old('days') }}" required autofocus>
-
-                        @if ($errors->has('days'))
+                        <div class="radio-inline">
+                            <label>
+                                <input type="radio" name="unit" value="1" {{ old('unit', 1) == 1 ? 'checked' : '' }}> day
+                            </label>
+                        </div>
+                        <div class="radio-inline">
+                            <label>
+                                <input type="radio" name="unit" value="2" {{ old('unit', 1) == 2 ? 'checked' : '' }}> week
+                            </label>
+                        </div>
+                        <div class="radio-inline">
+                            <label>
+                                <input type="radio" name="unit" value="3" {{ old('unit', 1) == 3 ? 'checked' : '' }}> month
+                            </label>
+                        </div>
+                        @if ($errors->has('unit'))
                             <span class="help-block">
-                                <strong>{{ $errors->first('days') }}</strong>
+                                <strong>{{ $errors->first('unit') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                </div>
+                <div class="form-group{{ $errors->has('num') ? ' has-error' : '' }}">
+                    <label for="num" class="col-md-4 control-label">How Long</label>
+
+                    <div class="col-md-6">
+                        <input id="num" type="number" class="form-control" name="num" value="{{ old('num') }}" required autofocus>
+
+                        @if ($errors->has('num'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('num') }}</strong>
+                            </span>
+                        @endif
+                    </div>
+                </div>
+                <div class="form-group{{ $errors->has('once') ? ' has-error' : '' }}">
+                    <label for="once" class="col-md-4 control-label">Once</label>
+
+                    <div class="col-md-6">
+                        <div class="radio-inline">
+                            <label>
+                                <input type="radio" name="once" value="0" {{ old('once') == 0 ? 'checked' : '' }}> no
+                            </label>
+                        </div>
+                        <div class="radio-inline">
+                            <label>
+                                <input type="radio" name="once" value="1" {{ old('once') == 1 ? 'checked' : '' }}> yes
+                            </label>
+                        </div>
+
+                        @if ($errors->has('once'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('once') }}</strong>
                             </span>
                         @endif
                     </div>
@@ -56,17 +104,17 @@
                     </div>
                 </div>
                 <div class="form-group{{ $errors->has('status') ? ' has-error' : '' }}">
-                    <label for="status" class="col-md-4 control-label">status</label>
+                    <label for="status" class="col-md-4 control-label">Status</label>
 
                     <div class="col-md-6">
                         <div class="radio-inline">
                             <label>
-                                <input type="radio" name="status" value="1" {{ old('status') === 0 ? '' : 'checked' }}> opened
+                                <input type="radio" name="status" value="1" {{ old('status', 1) == 1 ? 'checked' : '' }}> opened
                             </label>
                         </div>
                         <div class="radio-inline">
                             <label>
-                                <input type="radio" name="status" value="0" {{ old('status') !== 0 ? '' : 'checked' }}> closed
+                                <input type="radio" name="status" value="0" {{ old('status', 1) == 0 ? 'checked' : '' }}> closed
                             </label>
                         </div>
 

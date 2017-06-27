@@ -16,10 +16,12 @@ class CreatePackagesTable extends Migration
         Schema::create('packages', function(Blueprint $table) {
             $table->increments('id');
             $table->string('name', 30)->default('');
-            $table->unsignedInteger('days');
-            $table->decimal('commission_rate')->default('0');
+            $table->unsignedInteger('num');
+            $table->tinyInteger('unit')->default(1);
+            $table->boolean('once')->default(false);
+            $table->decimal('commission_rate')->default(0);
             $table->text('description')->nullable();
-            $table->unsignedTinyInteger('status')->default('1');
+            $table->boolean('status')->default(true);
             $table->timestamps();
         });
     }

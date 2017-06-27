@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Package;
+use App\Models\Plan;
 use Illuminate\Http\Request;
 use entimm\LaravelPerfectMoney\Facade\PerfectMoney;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class PaymentController
@@ -12,27 +15,50 @@ use entimm\LaravelPerfectMoney\Facade\PerfectMoney;
  */
 class PaymentController extends Controller
 {
+    private $payments = [
+        'perfectmoney' => 'Perfect Money',
+    ];
+
     public function deposit()
     {
-        $viewData = [
-            'memo' => sprintf('Deposit to %s User %s', config('app.name'), auth()->user()->name),
-        ];
-        return view('front.payment.deposit', $viewData);
+        $payments = $this->payments;
+        $packages = Package::where('status', 1)->get();
+        $memo = sprintf('Deposit to %s User %s', config('app.name'), auth()->user()->name);
+        return view('front.payment.deposit', compact('memo', 'packages', 'payments'));
+    }
+
+    public function depositConfirm(Request $request)
+    {
+        $this->validate($request, [
+            'amount' => 'required|numeric',
+            'package' => 'required|numeric',
+            'payment' => 'required|string',
+        ]);
+        $amount = $request->get('amount');
+        $packageId = $request->get('package');
+        $plans = Plan::where('package_id', $packageId)->get();
+        if ($amount < $plans->min('min')) {
+            $amount = $plans->min('min');
+        } elseif ($amount > $plans->max('max')) {
+            $amount = $plans->max('max');
+        }
+        $payment = $this->payments[$request->get('payment')];
+        $paymentAccount = Auth::user()->perfectmoney;
+        return view('front.payment.deposit_confirm', compact('amount', 'payment', 'paymentAccount'));
     }
 
     public function withdraw()
     {
-        $viewData = [
-            'memo' => sprintf('Deposit to %s User %s', config('app.name'), auth()->user()->name),
-        ];
-        return view('front.payment.withdraw', $viewData);
+        return view('front.payment.withdraw');
     }
 
     public function withdrawProcess(Request $request)
     {
         $this->validate($request, [
             'amount' => 'required|numeric',
+            'msg' => 'required|string',
         ]);
+        dd($request->all());
     }
 
     public function success()
@@ -48,6 +74,9 @@ class PaymentController extends Controller
     public function callback(Request $request)
     {
         if (PerfectMoney::validatePayment($request)) {
+            $amount = $request->input('PAYMENT_AMOUNT');
+            $batchNum = $request->input('PAYMENT_BATCH_NUM');
+            $payeer = $request->input('PAYER_ACCOUNT');
             return 'success';
         }
         return 'failure';

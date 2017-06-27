@@ -37,6 +37,9 @@
             <button type="submit" class="btn btn-primary">
                 Proceed
             </button>
+            <button class="btn btn-primary" onclick="document.location=window.history.go(-1)">
+                Cancel
+            </button>
         </div>
     </div>
 </form>
