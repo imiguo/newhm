@@ -10,9 +10,10 @@ return [
     | This value is the name of your application. This value is used when the
     | framework needs to place the application's name in a notification or
     | any other location as required by the application or its packages.
+    |
     */
 
-    'name' => 'midollar',
+    'name' => env('APP_NAME', 'Laravel'),
 
     /*
     |--------------------------------------------------------------------------
@@ -166,10 +167,7 @@ return [
         /*
          * Package Service Providers...
          */
-        Laravel\Tinker\TinkerServiceProvider::class,
         Laracasts\Flash\FlashServiceProvider::class,
-        entimm\LaravelPerfectMoney\PerfectMoneyServiceProvider::class,
-        Prettus\Repository\Providers\RepositoryServiceProvider::class,
 
         /*
          * Application Service Providers...
@@ -229,8 +227,6 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
 
-        'Flash' => Laracasts\Flash\Flash::class,
-        'PerfectMoney' => entimm\LaravelPerfectMoney\Facade\PerfectMoney::class,
     ],
 
 ];
