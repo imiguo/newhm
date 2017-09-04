@@ -5,11 +5,11 @@ namespace App\Http\Controllers\Admin\Old;
 use App\Http\Controllers\Controller;
 use App\Models\Old\History;
 use App\Services\MailService;
+use entimm\LaravelPerfectMoney\PerfectMoney;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Cache;
 use Laracasts\Flash\Flash;
-use entimm\LaravelPerfectMoney\Facade\PerfectMoney;
 use entimm\LaravelPerfectMoney\PerfectMoneyException;
 
 class PaymentsController extends Controller
@@ -18,7 +18,7 @@ class PaymentsController extends Controller
     {
         $balance = Cache::remember('perfectmoney.balance', 10, function () {
             try {
-                $res = PerfectMoney::getBalance();
+                $res = (new PerfectMoney)->getBalance();
                 $balance = '$ ' . $res[config('perfectmoney.marchant_id')];
             } catch (PerfectMoneyException $e) {
                 $balance = '-- (' . $e->getMessage() . ')';
@@ -45,7 +45,7 @@ class PaymentsController extends Controller
             $description = 'withdrawal from ' . config('app.name');
             $payment_id = $pending->id . '-' . time();
             try {
-                $res = PerfectMoney::sendMoney($pending->user->perfectmoney_account, abs($pending->amount), $description, $payment_id);
+                $res = (new PerfectMoney)->sendMoney($pending->user->perfectmoney_account, abs($pending->amount), $description, $payment_id);
                 $pending->payment_batch_num = $res['payment_batch_num'];
             } catch (PerfectMoneyException $e) {
                 Flash::error('error happened: ' . $e->getMessage());

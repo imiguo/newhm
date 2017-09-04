@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Package;
 use App\Models\Plan;
+use entimm\LaravelPerfectMoney\Merchant;
 use Illuminate\Http\Request;
-use entimm\LaravelPerfectMoney\Facade\PerfectMoney;
 use Illuminate\Support\Facades\Auth;
 
 /**
@@ -73,7 +73,7 @@ class PaymentController extends Controller
 
     public function callback(Request $request)
     {
-        if (PerfectMoney::validatePayment($request)) {
+        if (Merchant::validatePayment($request)) {
             $amount = $request->input('PAYMENT_AMOUNT');
             $batchNum = $request->input('PAYMENT_BATCH_NUM');
             $payeer = $request->input('PAYER_ACCOUNT');
